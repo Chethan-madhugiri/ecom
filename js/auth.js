@@ -1,5 +1,5 @@
 // Auth module
-const auth = {
+const authModule = {
     // DOM elements
     elements: {
         loginForm: document.getElementById('login-form'),
@@ -36,18 +36,13 @@ const auth = {
                 // Show loading indicator
                 this.toggleLoading('login', true);
                 
-                currentUser = await api.login(email, password);
-                
-                // Save to localStorage (optional)
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                await api.login(email, password);
+                // Firebase Auth state change listener will handle the rest
                 
                 // Clear form
                 this.elements.loginForm.reset();
-                
-                app.showPage('products');
             } catch (error) {
                 this.showError('login', error.message);
-            } finally {
                 this.toggleLoading('login', false);
             }
         });
@@ -72,18 +67,13 @@ const auth = {
                 // Show loading indicator
                 this.toggleLoading('signup', true);
                 
-                currentUser = await api.signup(email, name, password);
-                
-                // Save to localStorage (optional)
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                await api.signup(email, name, password);
+                // Firebase Auth state change listener will handle the rest
                 
                 // Clear form
                 this.elements.signupForm.reset();
-                
-                app.showPage('products');
             } catch (error) {
                 this.showError('signup', error.message);
-            } finally {
                 this.toggleLoading('signup', false);
             }
         });
@@ -91,9 +81,6 @@ const auth = {
         // Logout buttons
         this.elements.logoutBtn.addEventListener('click', this.logout);
         this.elements.logoutBtnCart.addEventListener('click', this.logout);
-        
-        // Check for previously logged in user
-        this.checkLoggedInUser();
     },
     
     // Validate login form
@@ -175,28 +162,11 @@ const auth = {
         }
     },
     
-    // Check for previously logged in user
-    checkLoggedInUser: function() {
-        try {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                app.showPage('products');
-            }
-        } catch (error) {
-            console.error('Error checking logged in user:', error);
-            localStorage.removeItem('currentUser');
-        }
-    },
-    
     // Logout function
     logout: function() {
-        currentUser = null;
-        cart = [];
-        
-        // Clear from localStorage
-        localStorage.removeItem('currentUser');
-        
-        app.showPage('login');
+        firebase.auth().signOut().catch(error => {
+            console.error('Error signing out:', error);
+        });
+        // Firebase Auth state change listener will handle the rest
     }
 };

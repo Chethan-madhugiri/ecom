@@ -31,14 +31,14 @@ const productsModule = {
         }
         
         products.forEach(product => {
-            const cartItem = cart.find(item => item.id === product.id);
+            const cartItem = cart.find(item => item.productId === product.id);
             const quantity = cartItem ? cartItem.quantity : 0;
             
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
             
             productCard.innerHTML = `
-                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <img src="${product.imageurl}" alt="${product.name}" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">${product.name}</h3>
                     <p class="product-price">$${product.price.toFixed(2)}</p>
@@ -61,7 +61,7 @@ const productsModule = {
         // Add event listeners
         document.querySelectorAll('.cart-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                const productId = parseInt(btn.getAttribute('data-id'));
+                const productId = btn.getAttribute('data-id');
                 cartModule.addToCart(productId);
                 this.renderProducts(products);
                 cartModule.updateCartCount();
@@ -70,7 +70,7 @@ const productsModule = {
         
         document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
             btn.addEventListener('click', () => {
-                const productId = parseInt(btn.getAttribute('data-id'));
+                const productId = btn.getAttribute('data-id');
                 cartModule.increaseQuantity(productId);
                 this.renderProducts(products);
                 cartModule.updateCartCount();
@@ -79,7 +79,7 @@ const productsModule = {
         
         document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
             btn.addEventListener('click', () => {
-                const productId = parseInt(btn.getAttribute('data-id'));
+                const productId = btn.getAttribute('data-id');
                 cartModule.decreaseQuantity(productId);
                 this.renderProducts(products);
                 cartModule.updateCartCount();

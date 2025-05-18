@@ -18,17 +18,14 @@ const app = {
     // Initialize application
     init: function() {
         // Initialize modules
-        auth.init();
+        authModule.init();
         productsModule.init();
         cartModule.init();
         
         // Set up navigation
         this.setupNavigation();
         
-        // Start with login page (if not logged in)
-        if (!currentUser) {
-            this.showPage('login');
-        }
+        // Firebase Auth state change listener will handle initial page show
     },
     
     // Set up navigation between pages
