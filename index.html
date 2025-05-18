@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce App</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page auth-page active">
+        <div class="auth-container">
+            <h1>Login to Shop</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div id="login-error" class="error-message"></div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="auth-switch">
+                <p>Don't have an account? <a href="#" id="go-to-signup">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup-page" class="page auth-page">
+        <div class="auth-container">
+            <h1>Create an Account</h1>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div id="signup-error" class="error-message"></div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <div class="auth-switch">
+                <p>Already have an account? <a href="#" id="go-to-login">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Listing Page -->
+    <div id="products-page" class="page">
+        <div class="container">
+            <div class="header">
+                <h1>Products</h1>
+                <div class="header-actions">
+                    <div class="cart-icon" id="go-to-cart">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </div>
+            <div id="products-grid" class="product-grid">
+                <!-- Product cards will be dynamically inserted here -->
+            </div>
+            <div class="checkout-btn-container">
+                <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart/Checkout Page -->
+    <div id="cart-page" class="page cart-page">
+        <div class="container">
+            <div class="header">
+                <h1>Your Cart</h1>
+                <div class="header-actions">
+                    <button class="logout-btn" id="back-to-products">Back to Products</button>
+                    <button class="logout-btn" id="logout-btn-cart">Logout</button>
+                </div>
+            </div>
+            <div id="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div class="cart-summary">
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span id="cart-total-amount">$0.00</span>
+                </div>
+                <button class="btn" id="place-order-btn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
